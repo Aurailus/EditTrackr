@@ -1,6 +1,5 @@
 from pypresence import Presence
 from pyxhook import HookManager
-import numpy
 import time
 import os
 
@@ -18,7 +17,7 @@ for x in range(arraylength):
 
 pointer = 0
 
-cli_id = 'your_id_here'
+cli_id = 'your_client_id_here'
 RPC = Presence(cli_id)
 
 def getProjectAndFile():
@@ -66,7 +65,7 @@ def avg_keys_per_second():
 RPC.connect()
 
 def update_rpc():
-	global curr_minute, last_wpm
+	global curr_minute, last_wpm, wpm
 
 	if (round(time.time()/60) != curr_minute):
 		last_wpm = wpm
@@ -94,7 +93,7 @@ def update_rpc():
 
 	RPC.update(
 		state="Project " + prinfo["project"] + "/" + prinfo["file"], 
-		details=str(avg_keys_per_second()) + "  | " + str(last_wpm) + " wpm",
+		details=str(avg_keys_per_second()) + " kps | " + str(last_wpm) + " wpm",
 		start=last_keypress,
 	  small_text=state_string,
 	  small_image=state_image,
